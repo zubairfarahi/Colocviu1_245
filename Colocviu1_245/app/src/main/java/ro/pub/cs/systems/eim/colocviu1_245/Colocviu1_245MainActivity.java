@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class Colocviu1_245MainActivity extends AppCompatActivity {
 
     private EditText editText;
@@ -43,18 +45,39 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
 
     public void nextActivity(View view) {
         Intent intent = new Intent(this,Colocviu1_245SecondaryActivity.class);
-        intent.putExtra("allTerms",num);
+        intent.putExtra("Term",Integer.toString(num));
         startActivityForResult(intent,50);
+
         Toast.makeText(getApplicationContext(), "result " + sum, Toast.LENGTH_LONG).show();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == 50) {
-            Toast.makeText(this, "result " + resultCode, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "result: " + resultCode, Toast.LENGTH_LONG).show();
             sum = resultCode;
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("f1", sum);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent in = getIntent();
+        Toast.makeText(getApplicationContext(),sum+"",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            sum = savedInstanceState.getInt("f1");
+        }
+    }
 }
