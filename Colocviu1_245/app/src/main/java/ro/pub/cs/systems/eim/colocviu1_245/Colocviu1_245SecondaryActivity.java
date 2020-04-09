@@ -23,12 +23,14 @@ public class Colocviu1_245SecondaryActivity extends AppCompatActivity {
 
     public int sumAll(){
         int sum = 0;
+        int j = 1;
         int a[] = new int[value];
-        for(int i=0;i<=value;i++)
+        for(int i=0;i<value;i++)
         {
-            a[i] = i;
+            a[i] = j;
+            j += 1;
         }
-        for (int i = 0; i <= value; i++) {
+        for (int i = 0; i < value; i++) {
                 sum += a[i];
         }
         System.out.println(sum);
